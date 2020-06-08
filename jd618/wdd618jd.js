@@ -68,7 +68,7 @@ function clickEveryDayTask() {
     }
     while (true) {
         //soutInitView(taskTv.parent().parent().parent());
-        sleep(1000);
+        sleep(1300);
         var taskIndexTv = className("android.view.View").text("去完成").findOnce(index);
         if (taskIndexTv == null) {
             console.info("任务已经都完成了");
@@ -84,6 +84,8 @@ function clickEveryDayTask() {
             taskIndexTv.click();
             sleep(5000);
             textStartsWith("恭喜完成").findOne(8000);
+            //关闭店铺商品优惠券弹窗
+            closeSeeGoosDialog();
             sleep(1000);
             try {
                 // 点击左上角的返回键
@@ -123,6 +125,8 @@ function clickEveryDayTask() {
                     console.log("正在浏览第" + (t + 1) + "个商品！");
                     idContains("view_").findOnce(t).click();
                     sleep(1000);
+                    //关闭店铺商品优惠券弹窗
+                    closeSeeGoosDialog();
                     back();
                     sleep(1000);
                 } else { }
@@ -135,13 +139,24 @@ function clickEveryDayTask() {
             }
             console.log("已完成第" + taskCount + "次任务！");
             taskCount++;
-        }else {
+        } else {
             //没有找到任务
             index++;
         }
     }
     console.info("任务完成-----------");
     return true;
+}
+
+//关闭店铺商品优惠券弹窗
+function closeSeeGoosDialog() {
+    var seeCloseOutIv = className("android.widget.ImageView").id("asj");
+    if (seeCloseOutIv.exists()) {
+        var seeCloseIv = seeCloseOutIv.findOnce();
+        if (seeCloseIv != null) {
+            seeCloseIv.click();
+        }
+    }
 }
 
 function soutInitView(v) {
