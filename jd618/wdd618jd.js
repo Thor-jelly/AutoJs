@@ -86,7 +86,7 @@ function clickEveryDayTask() {
             textStartsWith("恭喜完成").findOne(8000);
             //关闭店铺商品优惠券弹窗
             closeSeeGoosDialog();
-            sleep(1000);
+            sleep(1300);
             try {
                 // 点击左上角的返回键
                 id("fe").findOnce().click();
@@ -104,7 +104,7 @@ function clickEveryDayTask() {
             for (var t = 0; t < 5; t++) {
                 //修复加购问题,删掉了.child(2)子节点
                 idContains("cart_").findOnce(t).click();
-                sleep(1000);
+                sleep(1300);
             }
             try {
                 // 点击左上角的返回键
@@ -124,11 +124,11 @@ function clickEveryDayTask() {
                 if (textContains("浏览以下").findOnce()) {
                     console.log("正在浏览第" + (t + 1) + "个商品！");
                     idContains("view_").findOnce(t).click();
-                    sleep(1000);
+                    sleep(2000);
                     //关闭店铺商品优惠券弹窗
                     closeSeeGoosDialog();
                     back();
-                    sleep(1000);
+                    sleep(2000);
                 } else { }
             }
             try {
@@ -197,13 +197,15 @@ function adapterPhone() {
 
 //每天首次登陆签到弹窗
 function everyDaySignInDialog() {
-    sleep(5000);
+    sleep(6000);
     var signInV = className("android.view.View").textMatches("[^已]*签到.*").findOnce();
     if (signInV) {
         console.info("自动签到----------");
         signInV.parent().parent().click();
         sleep(1000);
         closeGetGoldTaskDialog();
+    }else{
+        console.error("未找到自动签到按钮----------");
     }
 
 }
@@ -222,7 +224,7 @@ function getCloseDialogIv() {
 
 //首页找到叠蛋糕界面
 function findCakeIv() {
-    sleep(1000)
+    sleep(1300);
     console.info("点击跳转到叠蛋糕界面");
     var cakeIv = className("android.widget.ImageView").desc("浮层活动").findOnce();
     if (cakeIv) {
